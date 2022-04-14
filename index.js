@@ -6,19 +6,19 @@ const app = express();
 
 app.get('/calc', function (req, res) {
   let parameters = req.query;
-  let opt = parameters.operation;
-  let nr1 = 0;
-  let nr2 = 0;
+  let op = parameters.operation;
+  let num1 = 0;
+  let num2 = 0;
   try {
-    nr1 = parseInt(parameters.numberone);
-    nr2 = parseInt(parameters.numbertwo);
-    if ((typeof (opt) === 'string') && typeof (nr1) === 'number' && typeof (nr2) === 'number') {
-      if ((opt === 'add') || (opt === 'sub') || (opt === 'div') || (opt === 'mul')) {
-        let result = calc(opt, nr1, nr2);
+    num1 = parseInt(parameters.numberone);
+    num2 = parseInt(parameters.numbertwo);
+    if ((typeof (op) === 'string') && typeof (num1) === 'number' && typeof (num2) === 'number') {
+      if ((op === 'add') || (op === 'sub') || (op === 'div') || (op === 'mul')) {
+        let result = calc(op, num1, num2);
         res.status(result._error ? 500 : 200);
         res.json(result);
       } else {
-        res.status(400);//Bad request
+        res.status(400);
         res.json(null);
       }
     } else {
@@ -26,33 +26,40 @@ app.get('/calc', function (req, res) {
       res.json(null);
     }
   } catch (error) {
-    res.status(500);//server internal error
+    res.status(500);
     res.json(null);
   }
 });
+
 app.get('/', function (req, res) {
-  res.status(404);//Page not available
+  res.status(404);
   res.json(null);
 });
-//start webserver on port ?
+
+app.get('*', function (req, res) {
+  res.status(404);
+  res.json(null);
+});
+
+//start the webserver on port X
 app.listen(port);
 
-//calculation functions
-function calc(operation, nr1, nr2) {
+// calulator
+function calc(op, num1, num2) {
   let result = 0;
-  switch (operation) {
+  switch (op) {
     case 'add':
-      result = nr1 + nr2;
+      result = num1 + num2;
       break;
     case 'sub':
-      result = nr1 - nr2;
+      result = num1 - num2;
       break;
     case 'div':
-      result = nr1 / nr2;
+      result = num1 / num2;
       break;
     case 'mul':
-      result = nr1 * nr2;
+      result = num1 * num2;
       break;
   }
   return result;
-}
+}   
