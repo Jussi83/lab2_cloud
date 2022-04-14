@@ -12,7 +12,7 @@ app.get('/calc', function (req, res) {
   try {
     num1 = parseInt(parameters.numberone);
     num2 = parseInt(parameters.numbertwo);
-    if ((typeof (op) === 'string') && typeof (num1) === 'numberone' && typeof (num2) === 'numbertwo') {
+    if ((typeof (op) === 'string') && typeof (num1) === 'number' && typeof (num2) === 'number') {
       if ((op === 'add') || (op === 'sub') || (op === 'div') || (op === 'mul')) {
         let result = calc(op, num1, num2);
         res.status(result._error ? 500 : 200);
