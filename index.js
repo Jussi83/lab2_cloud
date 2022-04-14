@@ -1,24 +1,24 @@
 const port = process.env.PORT || 3000;
 
-const express = require('express');
+const express = require('express');//setting up express
 
 const app = express();
 
-app.get('/calc', function (req, res) {
+app.get('/calc', function (req, res) {//calling endpoint calc
   let parameters = req.query;
-  let op = parameters.operation;
-  let num1 = 0;
-  let num2 = 0;
+  let operationen = parameters.operation;
+  let nr1 = 0;
+  let nr2 = 0;
   try {
-    num1 = parseInt(parameters.numberone);
-    num2 = parseInt(parameters.numbertwo);
-    if ((typeof (op) === 'string') && typeof (num1) === 'number' && typeof (num2) === 'number') {
-      if ((op === 'add') || (op === 'sub') || (op === 'div') || (op === 'mul')) {
-        let result = calc(op, num1, num2);
-        res.status(result._error ? 500 : 200);
+    nr1 = parseInt(parameters.numberone);
+    nr2 = parseInt(parameters.numbertwo);
+    if ((typeof (operationen) === 'string') && typeof (nr1) === 'number' && typeof (nr2) === 'number') {
+      if ((operationen === 'add') || (operationen === 'sub') || (operationen === 'div') || (operationen === 'mul')) {
+        let result = calc(operationen, nr1, nr2);
+        res.status(result._error ? 500 : 200);//checks https status
         res.json(result);
       } else {
-        res.status(400);
+        res.status(400);//Bad request
         res.json(null);
       }
     } else {
@@ -26,13 +26,13 @@ app.get('/calc', function (req, res) {
       res.json(null);
     }
   } catch (error) {
-    res.status(500);
+    res.status(500);//Internal server error!
     res.json(null);
   }
 });
 
 app.get('/', function (req, res) {
-  res.status(404);
+  res.status(404);//page not found
   res.json(null);
 });
 
@@ -41,10 +41,10 @@ app.get('*', function (req, res) {
   res.json(null);
 });
 
-//start the webserver on port X
+//start the webserver on which port you desire
 app.listen(port);
 
-// calulator
+// calulator function
 function calc(op, num1, num2) {
   let result = 0;
   switch (op) {
