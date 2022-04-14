@@ -1,6 +1,14 @@
 {
+  "name": "Lab2_cloud",
+  "version": "1.0.0",
+  "description": "Lab2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martin Jussi",
   "dependencies": {
-    "express": "^4.17.3",
-    "node.js": "^0.0.1-security"
+    "express": "^4.17.3"
   }
 }
