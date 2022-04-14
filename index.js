@@ -1,4 +1,4 @@
-const port = process.env.Port || 3000;
+const port = process.env.PORT || 3000;
 
 const express = require('express');
 
@@ -62,4 +62,4 @@ function calc(op, num1, num2) {
       break;
   }
   return result;
-}   
+}  
