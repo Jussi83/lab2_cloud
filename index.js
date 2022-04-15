@@ -41,8 +41,10 @@ app.get('*', function (req, res) {
   res.json(null);
 });
 
-//start the webserver on which port you desire
-app.listen(port);
+//start the webserver on which port you desire and it will listen
+app.listen(port, () => {
+  console.log("server listen on port: " + port)
+});
 
 // calulator function
 function calc(op, num1, num2) {
